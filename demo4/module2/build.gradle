@@ -1,0 +1,26 @@
+plugins {
+	id 'java'
+}
+
+group = 'com.4finance'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '14'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation files('libs/module1-0.0.1-SNAPSHOT.jar')
+}
+
+compileJava {
+	doFirst {
+		println "CLASSPATH IS $classpath.asPath"
+		options.compilerArgs = [
+			'--module-path', classpath.asPath,
+			'--add-modules', 'com.fourfinance.demo4.module1'
+		]
+		classpath = files()
+	}
+}
